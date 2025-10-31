@@ -1,5 +1,5 @@
 let collaborators = [];
-let userStories = []
+let userStories = [];
 let boardStories = [];
 let storyIdCounter = 1;
 
@@ -22,6 +22,21 @@ let storyIdCounter = 1;
  */
 function addCollaborator() {
     // À IMPLÉMENTER
+// let collaborateurslist = document.getElementById("collaboratorsList");
+// let collaborateur = document.getElementById("collaboratorName");
+// collaborators = collaborateur.value;
+    
+//     if(collaborators == ""){
+//         return ;
+//     }
+   
+  
+//     tableu
+// collaborateurslist  = collaborators.value;
+
+updateAssigneeSelect()
+
+
 }
 
 /**
@@ -70,6 +85,20 @@ function updateCollaboratorsList() {
  */
 function updateAssigneeSelect() {
     // À IMPLÉMENTER
+    let assigneeSelect = document.getElementById("storyAssignee");
+    let first_opt = document.createElement("option");
+
+    first_opt.textContent = "Non assigné";
+    assigneeSelect.innerHTML = ""
+    
+    assigneeSelect.appendChild(first_opt)
+    collaborators.forEach(co => {
+        let option = document.createElement("option");
+        option.textContent = co;
+        option.value = co   
+        assigneeSelect.appendChild(option);
+    })
+    
 }
 
 /**
@@ -85,35 +114,34 @@ function updateAssigneeSelect() {
 function addUserStory() {
     // À IMPLÉMENTER
 
-    let usr__Stories = [
+    let usr__Storie = 
         {
-            story__title:[]
-        },
-        {
-            str__assegnee:[]
-        },
-        {
-            str__sprint:[]
-        },
-        {
-            str__descri:[]
-        }
-    ];
+            title: "" ,
+        
+        
+            assegnee:"",
+        
+        
+           sprint:parseInt(document.getElementById("storySprint")),
+        
+            description:"",
+        };
+    
   
-let cree = document.getElementById("cree");
-cree.addEventListener('click',ajoute__usr);
-function ajoute__usr(){
-    for(let i=0;i<storyIdCounter;i++){
-boar__dStories[i].story__title.textContent = document.getElementById("storyTitle");
-boar__dStories[i].str__descri.textContent = document.getElementById("storyDescrtption");
-boar__dStories[i].str__sprint.textContent = document.getElementById("storySprint");
-boar__dStories[i].str__assegnee.text = document.getElementById("storyAssignee");
-console.log(boar__dStories[i].str__assegnee);
+    for(let i=0;i<usr__Storie.length;i++){
+       
+document.getElementById("storyTitle").textContent=usr__Stories[i].title;
+document.getElementById("storyDescription").textContent=usr__Stories[i].description;
+document.getElementById("storySprint").textContent=usr__Stories[i].sprint;
+document.getElementById("storyAssignee").textContent = usr__Stories[i].assegnee;
+
+
+    console.log(usr__Stories[i].assegnee)
     }
 
 }
 
-}
+
 
 /**
  * Fonction pour afficher le Sprint Backlog avec toutes les stories par sprint

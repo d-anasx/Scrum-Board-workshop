@@ -30,6 +30,7 @@ function addCollaborator() {
     }
     collaborators.push(addcollaborator);
     collaborateurslist.textContent = ""; 
+    collaborateur.value  = "";
     updateCollaboratorsList()
     updateAssigneeSelect()
     console.log(collaborators)
@@ -137,6 +138,7 @@ function renderSprintBacklog() {
  */
 function startSprint(sprintNum) {
     // À IMPLÉMENTER
+
 }
 
 /**

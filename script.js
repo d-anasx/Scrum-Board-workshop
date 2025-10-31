@@ -1,4 +1,4 @@
- let collaborators = ["anas" , "zaka" , "simo"];
+ let collaborators = [];
  let userStories = [];
 let boardStories = [];
 let storyIdCounter = 1;

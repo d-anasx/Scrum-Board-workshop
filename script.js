@@ -3,11 +3,9 @@ let userStories = [];
 let boardStories = [];
 let storyIdCounter = 1;
 
-
-
 /**
  * Fonction pour ajouter un nouveau collaborateur à l'équipe
- * TODO: 
+ * TODO:
  * - Récupérer la valeur du champ input avec l'id 'collaboratorName'
  * - Vérifier que le nom n'est pas vide et n'existe pas déjà dans le tableau 'collaborators'
  * - Ajouter le collaborateur au tableau 'collaborators'
@@ -16,25 +14,24 @@ let storyIdCounter = 1;
  * - Appeler updateAssigneeSelect() pour mettre à jour le select d'assignation
  */
 function addCollaborator() {
-    // À IMPLÉMENTER
-    let i;
-    let collaborateurslist = document.getElementById("collaboratorsList");
-    let collaborateur = document.getElementById("collaboratorName");
-    let addcollaborator = collaborateur.value;
-    let search = collaborators.includes(addcollaborator);
-    if (addcollaborator == "") {
-        return;
-    }
-    if (search == true) {
-        return;
-    }
-    collaborators.push(addcollaborator);
-    collaborateurslist.textContent = ""; 
-    collaborateur.value  = "";
-    updateCollaboratorsList()
-    updateAssigneeSelect()
-    console.log(collaborators)
-   
+  // À IMPLÉMENTER
+  let i;
+  let collaborateurslist = document.getElementById("collaboratorsList");
+  let collaborateur = document.getElementById("collaboratorName");
+  let addcollaborator = collaborateur.value;
+  let search = collaborators.includes(addcollaborator);
+  if (addcollaborator == "") {
+    return;
+  }
+  if (search == true) {
+    return;
+  }
+  collaborators.push(addcollaborator);
+  collaborateurslist.textContent = "";
+  collaborateur.value = "";
+  updateCollaboratorsList();
+  updateAssigneeSelect();
+  console.log(collaborators);
 }
 
 /**
@@ -46,30 +43,29 @@ function addCollaborator() {
  * - Injecter le HTML dans l'élément avec innerHTML
  */
 function updateCollaboratorsList() {
+  let collab_list = document.getElementById("collaboratorsList");
+  let ul = document.createElement("ul");
 
-    let collab_list = document.getElementById("collaboratorsList");
-    let ul = document.createElement("ul");
-
-    ul.style = `display : flex;
+  ul.style = `display : flex;
                 flex-direction : column;
                 gap : 0.5em;
                     
                     `;
 
-    collaborators.forEach(co => {
-        let li = document.createElement("ul");
-        li.textContent = co;
-        li.style = `background-color: #667eea ;
+  collaborators.forEach((co) => {
+    let li = document.createElement("ul");
+    li.textContent = co;
+    li.style = `background-color: #667eea ;
                     color: white;
                     padding : 8px 15px ;
                     border-radius : 20px ;
                     width : fit-content;
                     
-                    `
-        ul.appendChild(li);
-    })
+                    `;
+    ul.appendChild(li);
+  });
 
-    collab_list.appendChild(ul);
+  collab_list.appendChild(ul);
 }
 
 /**
@@ -80,21 +76,20 @@ function updateCollaboratorsList() {
  * - Mettre à jour le select avec innerHTML
  */
 function updateAssigneeSelect() {
-    // À IMPLÉMENTER
-    let assigneeSelect = document.getElementById("storyAssignee");
-    let first_opt = document.createElement("option");
+  // À IMPLÉMENTER
+  let assigneeSelect = document.getElementById("storyAssignee");
+  let first_opt = document.createElement("option");
 
-    first_opt.textContent = "Non assigné";
-    assigneeSelect.innerHTML = ""
+  first_opt.textContent = "Non assigné";
+  assigneeSelect.innerHTML = "";
 
-    assigneeSelect.appendChild(first_opt)
-    collaborators.forEach(co => {
-        let option = document.createElement("option");
-        option.textContent = co;
-        option.value = co
-        assigneeSelect.appendChild(option);
-    })
-
+  assigneeSelect.appendChild(first_opt);
+  collaborators.forEach((co) => {
+    let option = document.createElement("option");
+    option.textContent = co;
+    option.value = co;
+    assigneeSelect.appendChild(option);
+  });
 }
 
 /**
@@ -108,7 +103,8 @@ function updateAssigneeSelect() {
  * - Appeler renderSprintBacklog() pour actualiser l'affichage
  */
 function addUserStory() {
-    // À IMPLÉMENTER
+  // À IMPLÉMENTER
+  renderSprintBacklog();
 }
 
 /**
@@ -123,7 +119,59 @@ function addUserStory() {
  * - Injecter tout le HTML généré dans le conteneur
  */
 function renderSprintBacklog() {
-    // À IMPLÉMENTER
+  let sprintBacklog_container = document.getElementById("sprintBacklog");
+  let sprint_1_arr = [];
+  let sprint_2_arr = [];
+  let sprint_3_arr = [];
+  let filtred_arr = userStories.filter((u) => u.status === "backlog");
+
+  filtred_arr.forEach((s) => {
+    if (s.sprint == 1) sprint_1_arr.push(s);
+    if (s.sprint == 2) sprint_2_arr.push(s);
+    if (s.sprint == 3) sprint_3_arr.push(s);
+  });
+
+  let sprints = [sprint_1_arr,sprint_2_arr,sprint_3_arr];
+
+  sprintBacklog_container.innerHTML = "";
+  let html = "";
+
+
+  sprints.forEach((sprint,i) =>{
+     html += `
+  <div class="sprint-container">
+    <div class="sprint-header">
+      <h3>Sprint ${i+1}</h3>
+      <button class="start-sprint-btn" onclick="startSprint(${i+1})">
+        ▶ Démarrer Sprint
+      </button>
+    </div>
+    <div class="sprint-stories">
+`;
+
+  if (sprint.length > 0) {
+    sprint.forEach((s) => {
+      html += `
+      <div class="story-item">
+        <strong>${s.title}</strong>
+        <p>${s.description}</p>
+        <small>Assigné à: ${s.assignee}</small>
+      </div>
+    `;
+    });
+  } else {
+    html += `<strong>no story</strong>`;
+  }
+
+  html += `
+    </div>
+  </div>
+`;
+  })
+
+  sprintBacklog_container.innerHTML = html;
+
+  
 }
 
 /**
@@ -137,8 +185,7 @@ function renderSprintBacklog() {
  * - Appeler renderSprintBacklog() et renderBoard() pour mettre à jour l'affichage
  */
 function startSprint(sprintNum) {
-    // À IMPLÉMENTER
-
+  // À IMPLÉMENTER
 }
 
 /**
@@ -154,7 +201,7 @@ function startSprint(sprintNum) {
  *   - Injecter le HTML dans le conteneur
  */
 function renderBoard() {
-    // À IMPLÉMENTER
+  // À IMPLÉMENTER
 }
 
 /**
@@ -164,7 +211,7 @@ function renderBoard() {
  * - Retourner le status suivant selon le status actuel
  */
 function getNextStatus(current) {
-    // À IMPLÉMENTER
+  // À IMPLÉMENTER
 }
 
 /**
@@ -174,7 +221,7 @@ function getNextStatus(current) {
  * - Retourner le status précédent selon le status actuel
  */
 function getPrevStatus(current) {
-    // À IMPLÉMENTER
+  // À IMPLÉMENTER
 }
 
 /**
@@ -185,7 +232,7 @@ function getPrevStatus(current) {
  * - Appeler renderBoard() pour actualiser l'affichage
  */
 function moveCard(id, newStatus) {
-    // À IMPLÉMENTER
+  // À IMPLÉMENTER
 }
 
 /**
@@ -195,7 +242,7 @@ function moveCard(id, newStatus) {
  * - Appeler renderBoard() pour actualiser l'affichage
  */
 function deleteCard(id) {
-    // À IMPLÉMENTER
+  // À IMPLÉMENTER
 }
 
 // Initialisation

@@ -1,5 +1,5 @@
- let collaborators = [];
- let userStories = [];
+let collaborators = [];
+let userStories = [];
 let boardStories = [];
 let storyIdCounter = 1;
 
@@ -17,26 +17,23 @@ let storyIdCounter = 1;
  */
 function addCollaborator() {
     // À IMPLÉMENTER
-    let i = 0;
-  
-let collaborateurslist = document.getElementById("collaboratorsList");
-let collaborateur = document.getElementById("collaboratorName");
-let addcollaborator = collaborateur.value;
-     let search = collaborators.includes(collaborators[i]);
-       if (addcollaborator == ""){
+    let i;
+    let collaborateurslist = document.getElementById("collaboratorsList");
+    let collaborateur = document.getElementById("collaboratorName");
+    let addcollaborator = collaborateur.value;
+    let search = collaborators.includes(addcollaborator);
+    if (addcollaborator == "") {
         return;
-       }
-     if (search == true){
+    }
+    if (search == true) {
         return;
-     }
-   collaborators[i] = addcollaborator;
-   i++; 
-  for (i = 0 ; i < length.collaborators ; i++){
-   collaborateurslist.document.textContent = collaborators[i];
-  }
-updateCollaboratorsList()
-updateAssigneeSelect()
-console.log()
+    }
+    collaborators.push(addcollaborator);
+    collaborateurslist.textContent = ""; 
+    updateCollaboratorsList()
+    updateAssigneeSelect()
+    console.log(collaborators)
+   
 }
 
 /**
@@ -48,7 +45,7 @@ console.log()
  * - Injecter le HTML dans l'élément avec innerHTML
  */
 function updateCollaboratorsList() {
-    
+
     let collab_list = document.getElementById("collaboratorsList");
     let ul = document.createElement("ul");
 
@@ -61,7 +58,7 @@ function updateCollaboratorsList() {
     collaborators.forEach(co => {
         let li = document.createElement("ul");
         li.textContent = co;
-        li.style =`background-color: #667eea ;
+        li.style = `background-color: #667eea ;
                     color: white;
                     padding : 8px 15px ;
                     border-radius : 20px ;
@@ -70,7 +67,7 @@ function updateCollaboratorsList() {
                     `
         ul.appendChild(li);
     })
-    
+
     collab_list.appendChild(ul);
 }
 
@@ -83,6 +80,20 @@ function updateCollaboratorsList() {
  */
 function updateAssigneeSelect() {
     // À IMPLÉMENTER
+    let assigneeSelect = document.getElementById("storyAssignee");
+    let first_opt = document.createElement("option");
+
+    first_opt.textContent = "Non assigné";
+    assigneeSelect.innerHTML = ""
+
+    assigneeSelect.appendChild(first_opt)
+    collaborators.forEach(co => {
+        let option = document.createElement("option");
+        option.textContent = co;
+        option.value = co
+        assigneeSelect.appendChild(option);
+    })
+
 }
 
 /**

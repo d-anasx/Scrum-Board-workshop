@@ -17,20 +17,26 @@ let storyIdCounter = 1;
  */
 function addCollaborator() {
     // À IMPLÉMENTER
+    let i = 0;
+  
 let collaborateurslist = document.getElementById("collaboratorsList");
 let collaborateur = document.getElementById("collaboratorName");
-collaborators = collaborateur.value;
-    
-    if(collaborators == ""){
-        return ;
-    }
-   
-  
-    tableu
-collaborateurslist  = collaborators.value;
-
-
-
+let addcollaborator = collaborateur.value;
+     let search = collaborators.includes(collaborators[i]);
+       if (addcollaborator == ""){
+        return;
+       }
+     if (search == true){
+        return;
+     }
+   collaborators[i] = addcollaborator;
+   i++; 
+  for (i = 0 ; i < length.collaborators ; i++){
+   collaborateurslist.document.textContent = collaborators[i];
+  }
+updateCollaboratorsList()
+updateAssigneeSelect()
+console.log()
 }
 
 /**

@@ -103,9 +103,39 @@ function updateAssigneeSelect() {
  * - Appeler renderSprintBacklog() pour actualiser l'affichage
  */
 function addUserStory() {
-  // À IMPLÉMENTER
-  renderSprintBacklog();
+    // À IMPLÉMENTER
+
+    let usr__Storie = 
+        {
+            id : storyIdCounter,
+            title: document.getElementById("storyTitle").value,
+        
+        
+            assegnee:document.getElementById("storyAssignee").value,
+        
+        
+           sprint: document.getElementById("storySprint").value,
+        
+            description: document.getElementById("storyDescription").value,
+
+            status: 'backlog'
+        };
+    storyIdCounter++;
+
+
+userStories.push(usr__Storie);
+
+             document.getElementById("storyTitle").value=''
+     
+           document.getElementById("storyDescription").value=''
+           
+
+
+
 }
+
+
+
 
 /**
  * Fonction pour afficher le Sprint Backlog avec toutes les stories par sprint

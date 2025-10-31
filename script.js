@@ -1,4 +1,4 @@
- let collaborators = [];
+ let collaborators = ["anas" , "zaka" , "simo"];
  let userStories = [];
 let boardStories = [];
 let storyIdCounter = 1;
@@ -17,18 +17,19 @@ let storyIdCounter = 1;
  */
 function addCollaborator() {
     // À IMPLÉMENTER
-let collaborateurslist = document.getElementById("collaboratorsList");
-let collaborateur = document.getElementById("collaboratorName");
-collaborators = collaborateur.value;
+// let collaborateurslist = document.getElementById("collaboratorsList");
+// let collaborateur = document.getElementById("collaboratorName");
+// collaborators = collaborateur.value;
     
-    if(collaborators == ""){
-        return ;
-    }
+//     if(collaborators == ""){
+//         return ;
+//     }
    
   
-    tableu
-collaborateurslist  = collaborators.value;
+//     tableu
+// collaborateurslist  = collaborators.value;
 
+updateAssigneeSelect()
 
 
 }
@@ -77,6 +78,20 @@ function updateCollaboratorsList() {
  */
 function updateAssigneeSelect() {
     // À IMPLÉMENTER
+    let assigneeSelect = document.getElementById("storyAssignee");
+    let first_opt = document.createElement("option");
+
+    first_opt.textContent = "Non assigné";
+    assigneeSelect.innerHTML = ""
+    
+    assigneeSelect.appendChild(first_opt)
+    collaborators.forEach(co => {
+        let option = document.createElement("option");
+        option.textContent = co;
+        option.value = co   
+        assigneeSelect.appendChild(option);
+    })
+    
 }
 
 /**

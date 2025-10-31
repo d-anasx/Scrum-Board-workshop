@@ -1,8 +1,7 @@
 let collaborators = [];
-
+let userStories = []
 let boardStories = [];
 let storyIdCounter = 1;
-
 
 // for(i=0;i<collaborators.length;i++){
 
@@ -34,7 +33,32 @@ function addCollaborator() {
  * - Injecter le HTML dans l'élément avec innerHTML
  */
 function updateCollaboratorsList() {
-    // À IMPLÉMENTER
+
+    
+    let collab_list = document.getElementById("collaboratorsList");
+    let ul = document.createElement("ul");
+
+    ul.style = `display : flex;
+                flex-direction : column;
+                gap : 0.5em;
+                    
+                    `;
+
+    collaborators.forEach(co => {
+        let li = document.createElement("ul");
+        li.textContent = co;
+        li.style =`background-color: #667eea ;
+                    color: white;
+                    padding : 8px 15px ;
+                    border-radius : 20px ;
+                    width : fit-content;
+                    
+                    `
+        ul.appendChild(li);
+    })
+    
+    collab_list.appendChild(ul);
+
 }
 
 /**
@@ -60,6 +84,35 @@ function updateAssigneeSelect() {
  */
 function addUserStory() {
     // À IMPLÉMENTER
+
+    let usr__Stories = [
+        {
+            story__title:[]
+        },
+        {
+            str__assegnee:[]
+        },
+        {
+            str__sprint:[]
+        },
+        {
+            str__descri:[]
+        }
+    ];
+  
+let cree = document.getElementById("cree");
+cree.addEventListener('click',ajoute__usr);
+function ajoute__usr(){
+    for(let i=0;i<storyIdCounter;i++){
+boar__dStories[i].story__title.textContent = document.getElementById("storyTitle");
+boar__dStories[i].str__descri.textContent = document.getElementById("storyDescrtption");
+boar__dStories[i].str__sprint.textContent = document.getElementById("storySprint");
+boar__dStories[i].str__assegnee.text = document.getElementById("storyAssignee");
+console.log(boar__dStories[i].str__assegnee);
+    }
+
+}
+
 }
 
 /**
@@ -146,24 +199,29 @@ function moveCard(id, newStatus) {
  */
 function deleteCard(id) {
     // À IMPLÉMENTER
-// let boardStories = [];
 
-story__title=document.getElementById("storyTitle");
-str__descri=document.getElementById("storyDescrtption");
-str__sprint=document.getElementById("storySprint");
-str__assegnee=document.getElementById("storyAssignee");
-let userStories = [story__title,]
 
-    // story__title['hello evryone','we are here','nothing here'],
-    // str__descri['we are now in youcode',''],
-    // str__sprint[],str__assegnee[]];
+// story__title=document.getElementById("storyTitle");
+// str__descri=document.getElementById("storyDescrtption");
+// str__sprint=document.getElementById("storySprint");
+// str__assegnee=document.getElementById("storyAssignee");
 
+
+    // the supprime button is not exixste 
+    let supp_button = document.getElementById("supprime");
+
+
+    supp_button.addEventListener('click',supprime);
+    function supprime(){
 for(i=0;i<storyIdCounter;i++){
 
+
+
+       }
+    }
 }
 
 
-}
 
 // Initialisation
 renderSprintBacklog();

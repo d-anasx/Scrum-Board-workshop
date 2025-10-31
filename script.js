@@ -22,21 +22,24 @@ let storyIdCounter = 1;
  */
 function addCollaborator() {
     // À IMPLÉMENTER
-// let collaborateurslist = document.getElementById("collaboratorsList");
-// let collaborateur = document.getElementById("collaboratorName");
-// collaborators = collaborateur.value;
-    
-//     if(collaborators == ""){
-//         return ;
-//     }
+    let i;
+    let collaborateurslist = document.getElementById("collaboratorsList");
+    let collaborateur = document.getElementById("collaboratorName");
+    let addcollaborator = collaborateur.value;
+    let search = collaborators.includes(addcollaborator);
+    if (addcollaborator == "") {
+        return;
+    }
+    if (search == true) {
+        return;
+    }
+    collaborators.push(addcollaborator);
+    collaborateurslist.textContent = ""; 
+    collaborateur.value  = "";
+    updateCollaboratorsList()
+    updateAssigneeSelect()
+    console.log(collaborators)
    
-  
-//     tableu
-// collaborateurslist  = collaborators.value;
-
-updateAssigneeSelect()
-
-
 }
 
 /**
@@ -62,7 +65,7 @@ function updateCollaboratorsList() {
     collaborators.forEach(co => {
         let li = document.createElement("ul");
         li.textContent = co;
-        li.style =`background-color: #667eea ;
+        li.style = `background-color: #667eea ;
                     color: white;
                     padding : 8px 15px ;
                     border-radius : 20px ;
@@ -71,7 +74,7 @@ function updateCollaboratorsList() {
                     `
         ul.appendChild(li);
     })
-    
+
     collab_list.appendChild(ul);
 
 }
@@ -90,15 +93,15 @@ function updateAssigneeSelect() {
 
     first_opt.textContent = "Non assigné";
     assigneeSelect.innerHTML = ""
-    
+
     assigneeSelect.appendChild(first_opt)
     collaborators.forEach(co => {
         let option = document.createElement("option");
         option.textContent = co;
-        option.value = co   
+        option.value = co
         assigneeSelect.appendChild(option);
     })
-    
+
 }
 
 /**
@@ -116,30 +119,33 @@ function addUserStory() {
 
     let usr__Storie = 
         {
-            title: "" ,
+            id : storyIdCounter,
+            title: document.getElementById("storyTitle").value,
         
         
-            assegnee:"",
+            assegnee:document.getElementById("storyAssignee").value,
         
         
-           sprint:parseInt(document.getElementById("storySprint")),
+           sprint: document.getElementById("storySprint").value,
         
-            description:"",
+            description: document.getElementById("storyDescription").value,
+
+            status: 'backlog'
         };
-    
-  
-    for(let i=0;i<usr__Storie.length;i++){
-       
-document.getElementById("storyTitle").textContent=usr__Stories[i].title;
-document.getElementById("storyDescription").textContent=usr__Stories[i].description;
-document.getElementById("storySprint").textContent=usr__Stories[i].sprint;
-document.getElementById("storyAssignee").textContent = usr__Stories[i].assegnee;
+    storyIdCounter++;
 
 
-    console.log(usr__Stories[i].assegnee)
-    }
+userStories.push(usr__Storie);
+
+             document.getElementById("storyTitle").value=''
+     
+           document.getElementById("storyDescription").value=''
+           
+
+
 
 }
+
 
 
 
@@ -170,6 +176,7 @@ function renderSprintBacklog() {
  */
 function startSprint(sprintNum) {
     // À IMPLÉMENTER
+
 }
 
 /**

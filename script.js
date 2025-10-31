@@ -2,9 +2,8 @@
  let userStories = [];
 let boardStories = [];
 let storyIdCounter = 1;
-let collaborateurslist = document.getElementById("collaboratorsList");
-let collaborateur = document.getElementById("collaboratorName");
-collaborators = collaborateur.value;
+
+
 
 /**
  * Fonction pour ajouter un nouveau collaborateur à l'équipe
@@ -18,6 +17,10 @@ collaborators = collaborateur.value;
  */
 function addCollaborator() {
     // À IMPLÉMENTER
+let collaborateurslist = document.getElementById("collaboratorsList");
+let collaborateur = document.getElementById("collaboratorName");
+collaborators = collaborateur.value;
+    
     if(collaborators == ""){
         return ;
     }
@@ -25,6 +28,8 @@ function addCollaborator() {
   
     tableu
 collaborateurslist  = collaborators.value;
+
+
 
 }
 
@@ -37,7 +42,30 @@ collaborateurslist  = collaborators.value;
  * - Injecter le HTML dans l'élément avec innerHTML
  */
 function updateCollaboratorsList() {
-    // À IMPLÉMENTER
+    
+    let collab_list = document.getElementById("collaboratorsList");
+    let ul = document.createElement("ul");
+
+    ul.style = `display : flex;
+                flex-direction : column;
+                gap : 0.5em;
+                    
+                    `;
+
+    collaborators.forEach(co => {
+        let li = document.createElement("ul");
+        li.textContent = co;
+        li.style =`background-color: #667eea ;
+                    color: white;
+                    padding : 8px 15px ;
+                    border-radius : 20px ;
+                    width : fit-content;
+                    
+                    `
+        ul.appendChild(li);
+    })
+    
+    collab_list.appendChild(ul);
 }
 
 /**
